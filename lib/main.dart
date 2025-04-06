@@ -1,14 +1,24 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'app/core/config/app_color.dart';
 import 'app/routes/route_page.dart';
+import 'features/auth/presentation/provider/auth_repository_provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final sharedPreferences = await SharedPreferences.getInstance();
+
   runApp(
     DevicePreview(
-        builder: (context) {
-        return const ProviderScope(child: MyApp());
+      builder: (context) {
+        return ProviderScope(
+          overrides: [
+            sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+          ],
+          child: MyApp(),
+        );
       },
     ),
   );

@@ -35,6 +35,7 @@ abstract class AppString {
   static const String stayLoggedIn = 'Angemeldet bleiben';
 
   /// error messages
+  static const String error = 'Fehler';
   static const String emailEmptyError =
       'Bitte geben Sie eine E-Mail-Adresse ein';
   static const String emailError =
@@ -46,4 +47,9 @@ abstract class AppString {
 
   static const String testNow = 'Jetzt unverbindlich testen';
   static const String startTest = 'Testzugang anfragen';
+
+  /// login error message
+  static const String loginError = 'Fehler bei der Anmeldung';
+  static const String signUpError = 'Fehler bei der Registrierung';
+  static const String logoutError = 'Fehler beim Abmelden';
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../../../app/core/config/app_string.dart';
+import '../../data/models/auth_error_model.dart';
 import 'auth_provider.dart';
 
 class LoginFromState {
@@ -42,7 +43,7 @@ class LoginFromState {
   final bool isPresisted;
 
   String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) { 
+    if (value == null || value.isEmpty) {
       return AppString.emailEmptyError;
     }
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -130,9 +131,11 @@ class LoginFormControllerNotifier extends StateNotifier<LoginFromState> {
         await ref
             .read(authProvider.notifier)
             .login(state.emailController.text, state.passwordController.text);
-      } catch (e) {
+      } on AuthErrorModel catch (e) {
         state = state.copyWith(isLoading: false);
-        log('[FormControllerNotifier] Login Error: $e');
+        log(
+          '[FormControllerNotifier] Login Error: ${e.error} message : ${e.message}',
+        );
       } finally {
         state = state.copyWith(isLoading: false);
       }
@@ -144,3 +147,8 @@ final loginFormProvier = StateNotifierProvider.autoDispose<
   LoginFormControllerNotifier,
   LoginFromState
 >((ref) => LoginFormControllerNotifier(ref));
+
+final scaffoldMessengerProvider =
+    Provider.autoDispose<GlobalKey<ScaffoldMessengerState>>((ref) {
+      return GlobalKey<ScaffoldMessengerState>();
+    });

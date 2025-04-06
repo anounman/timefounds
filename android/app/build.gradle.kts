@@ -7,8 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.timefounds"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdk = 34
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
