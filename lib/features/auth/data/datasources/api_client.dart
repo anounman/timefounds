@@ -33,4 +33,21 @@ class ApiClient {
       throw Exception(e);
     }
   }
+
+  Future<ApiResponse> get(String url) async {
+    try {
+      final response = await client.get(Uri.parse(url));
+      log('[api client] url: $url');
+      log(
+        '[api client] response: ${response.body} statuscode:${response.statusCode}',
+      );
+      return ApiResponse(
+        data: json.decode(response.body),
+        statusCode: response.statusCode,
+      );
+    } catch (e) {
+      log('[api client] error:$e');
+      throw Exception(e);
+    }
+  }
 }
