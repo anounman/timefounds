@@ -10,20 +10,19 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
 
-void main() {
   const bool isDebug = bool.fromEnvironment('dart.vm.product') == false;
 
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     isDebug
         ? DevicePreview(
-        builder: (context) {
+          builder: (context) {
             return ProviderScope(
-          overrides: [
-            sharedPreferencesProvider.overrideWithValue(sharedPreferences),
-          ],
-          child: MyApp(),
-        );
+              overrides: [
+                sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+              ],
+              child: MyApp(),
+            );
           },
         )
         : const ProviderScope(child: MyApp()),
