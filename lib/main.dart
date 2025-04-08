@@ -9,13 +9,16 @@ void main() {
 
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    isDebug
-        ? DevicePreview(
-          builder: (context) {
-            return const ProviderScope(child: MyApp());
-          },
-        )
-        : const ProviderScope(child: MyApp()),
+    ProviderScope(
+      child:
+          isDebug
+              ? DevicePreview(
+                builder: (context) {
+                  return MyApp();
+                },
+              )
+              : const MyApp(),
+    ),
   );
 }
 

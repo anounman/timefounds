@@ -15,6 +15,8 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
+  plugins:
+    - custom_lint
   errors:
     # allow having TODOs in code
     todo: info
@@ -1023,3 +1025,5 @@ linter:
     # Don't assign anything to void
     # https://dart-lang.github.io/linter/lints/void_checks.html
     # - void_checks
+custom_lint:
+  - riverpod_lint
