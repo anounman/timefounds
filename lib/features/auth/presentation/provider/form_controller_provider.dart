@@ -96,7 +96,7 @@ class LoginFormControllerNotifier extends StateNotifier<LoginFromState> {
 
   void setEmail(String email) {
     state.emailController.text = email;
-  }
+  }         
 
   void setPassword(String password) {
     state.passwordController.text = password;

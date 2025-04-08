@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import '../../../../app/core/error/failures.dart';
 import '../entities/user.dart';
 
-abstract class AuthRepository {
+abstract   class AuthRepository {
   Future<Either<Failure, User>> login({
     required String email,
     required String password,
@@ -16,3 +16,4 @@ abstract class AuthRepository {
   bool isLoggedIn();
   Future<void> logout();
 }
+  
