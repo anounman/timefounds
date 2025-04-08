@@ -29,7 +29,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   void logout() {
     state = AuthState();
-    super.dispose();
   }
 }
 
