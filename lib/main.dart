@@ -5,12 +5,17 @@ import 'app/core/config/app_color.dart';
 import 'app/routes/route_page.dart';
 
 void main() {
+  const bool isDebug = bool.fromEnvironment('dart.vm.product') == false;
+
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    DevicePreview(
-        builder: (context) {
-        return const ProviderScope(child: MyApp());
-      },
-    ),
+    isDebug
+        ? DevicePreview(
+          builder: (context) {
+            return const ProviderScope(child: MyApp());
+          },
+        )
+        : const ProviderScope(child: MyApp()),
   );
 }
 

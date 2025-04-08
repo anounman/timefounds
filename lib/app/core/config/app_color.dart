@@ -28,4 +28,6 @@ abstract class AppColor {
   static const Color activeCheck = Colors.white;
 
   static const Color testButtonBg = Colors.transparent;
+
+  static const Color progressBar = Colors.white;
 }

@@ -28,7 +28,7 @@ class LoginScreen extends ConsumerWidget {
                 Column(children: [_header(), _loginForm()]),
                 _loginButton(),
                 _resetPassword(),
-                _testWidget(),
+                _testButton(context.mediaQuerySize),
               ],
             ),
           ),
@@ -43,9 +43,8 @@ class LoginScreen extends ConsumerWidget {
 
   Widget _loginForm() {
     return Consumer(
-      builder: (context, ref, child) {
+      builder: (context, ref, _) {
         final formController = ref.watch(loginFormProvier);
-
         return Column(
           spacing: context.height * 0.001,
           children: [
@@ -70,7 +69,7 @@ class LoginScreen extends ConsumerWidget {
                     icon: LucideIcons.lock,
                     textField: CustomTextField.standerdInput(
                       context: context,
-                      hintText: AppString.password, // Fixed text
+                      hintText: AppString.password,
                       suffix: GestureDetector(
                         onTap:
                             () =>
@@ -89,6 +88,9 @@ class LoginScreen extends ConsumerWidget {
                       textInputType: TextInputType.visiblePassword,
                       isHidden: formController.isHidden,
                       validator: formController.validatePassword,
+                      onSubmit:
+                          (_) =>
+                              ref.read(loginFormProvier.notifier).handelLogin(),
                     ),
                   ),
                 ],
@@ -106,12 +108,13 @@ class LoginScreen extends ConsumerWidget {
   }
 
   Widget _loginButton() {
-    return Center(
-      child: Consumer(
-        builder: (context, ref, chil) {
-          final formController = ref.watch(loginFormProvier);
-          return GestureDetector(
+    return Consumer(
+      builder: (context, ref, _) {
+        final formController = ref.watch(loginFormProvier);
+        return Center(
+          child: GestureDetector(
             onTap: () {
+              FocusScope.of(context).unfocus();
               ref.read(loginFormProvier.notifier).handelLogin();
             },
             child: Container(
@@ -123,7 +126,7 @@ class LoginScreen extends ConsumerWidget {
               child: Center(
                 child:
                     formController.isLoading
-                        ? CircularProgressIndicator()
+                        ? CircularProgressIndicator(color: AppColor.progressBar)
                         : Text(
                           AppString.login,
                           style: CustomTextStyle.regularText.copyWith(
@@ -132,17 +135,16 @@ class LoginScreen extends ConsumerWidget {
                         ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
   Widget _stayLogin() {
     return Consumer(
-      builder: (context, ref, child) {
+      builder: (context, ref, _) {
         bool isChecked = ref.watch(loginFormProvier).isPresisted;
-
         return Padding(
           padding: EdgeInsets.only(left: context.height * 0.025),
           child: Row(
@@ -178,41 +180,37 @@ class LoginScreen extends ConsumerWidget {
     );
   }
 
-  Widget _testWidget() {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        return Column(
-          spacing: context.height * 0.035,
-          children: [
-            Text(
-              AppString.testNow,
-              style: CustomTextStyle.regularText.copyWith(
-                color: AppColor.regularText,
-                fontSize: 18,
+  Widget _testButton(Size deviceSize) {
+    return Column(
+      spacing: deviceSize.height * 0.035,
+      children: [
+        Text(
+          AppString.testNow,
+          style: CustomTextStyle.regularText.copyWith(
+            color: AppColor.regularText,
+            fontSize: 18,
+          ),
+        ),
+        Container(
+          width: deviceSize.width * 0.8,
+          decoration: BoxDecoration(
+            color: AppColor.testButtonBg,
+            border: Border.all(width: 3),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: deviceSize.height * 0.01,
+              bottom: deviceSize.height * 0.01,
+            ),
+            child: Center(
+              child: Text(
+                AppString.startTest,
+                style: CustomTextStyle.testButtonText,
               ),
             ),
-            Container(
-              width: context.width * 0.8,
-              decoration: BoxDecoration(
-                color: AppColor.testButtonBg,
-                border: Border.all(width: 3),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: context.height * 0.01,
-                  bottom: context.height * 0.01,
-                ),
-                child: Center(
-                  child: Text(
-                    AppString.startTest,
-                    style: CustomTextStyle.testButtonText,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
+          ),
+        ),
+      ],
     );
   }
 }

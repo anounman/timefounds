@@ -6,7 +6,7 @@ class AuthState {
   final String? email;
   final String? password;
 
-  AuthState copyWith({bool? isAuthenticated, String? email , String? password}) {
+  AuthState copyWith({bool? isAuthenticated, String? email, String? password}) {
     return AuthState(
       isAuthenticated: isAuthenticated ?? this.isAuthenticated,
       email: email ?? this.email,
@@ -20,11 +20,16 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   Future<void> login(String email, String password) async {
     await Future.delayed(const Duration(seconds: 2));
-    state = state.copyWith(isAuthenticated: true, email: email , password: password);
+    state = state.copyWith(
+      isAuthenticated: true,
+      email: email,
+      password: password,
+    );
   }
 
   void logout() {
     state = AuthState();
+    super.dispose();
   }
 }
 

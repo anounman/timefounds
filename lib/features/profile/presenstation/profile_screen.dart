@@ -22,17 +22,17 @@ class ProfileScreen extends HookConsumerWidget {
 
   Widget _body() {
     return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final email = ref.watch(authProvider).email!;
+      builder: (context, ref, _) {
+        final email = ref.watch(authProvider).email ?? "";
         return SingleChildScrollView(
           child: Column(
             children: [
               ProfileCard(email: email),
               Padding(
                 padding: EdgeInsets.only(top: context.height * 0.02),
-                child: _menuItem(),
+                child: _menuItem(context),
               ),
-              _profileDefaultItems(),
+              _profileDefaultItems(context),
               _logoutButton(),
             ],
           ),
@@ -41,64 +41,56 @@ class ProfileScreen extends HookConsumerWidget {
     );
   }
 
-  Widget _menuItem() {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        return Column(
-          children: [
-            ProfileListItem(
-              icon: LucideIcons.mail,
-              title: AppString.postbox,
-              description: AppString.postBoxDesc,
-              onTap: () => context.pushNamed(AppRoutes.postBox),
-            ),
-            ProfileListItem(
-              icon: LucideIcons.userCircle,
-              title: AppString.personalData,
-              description: AppString.personalDataDesc,
-              onTap: () => context.pushNamed(AppRoutes.personalData),
-            ),
-            ProfileListItem(
-              icon: LucideIcons.building2,
-              title: AppString.employmentData,
-              description: AppString.employmentDataDesc,
-              onTap: () => context.pushNamed(AppRoutes.employmentData),
-            ),
-          ],
-        );
-      },
+  Widget _menuItem(BuildContext context) {
+    return Column(
+      children: [
+        ProfileListItem(
+          icon: LucideIcons.mail,
+          title: AppString.postbox,
+          description: AppString.postBoxDesc,
+          onTap: () => context.pushNamed(AppRoutes.postBox),
+        ),
+        ProfileListItem(
+          icon: LucideIcons.userCircle,
+          title: AppString.personalData,
+          description: AppString.personalDataDesc,
+          onTap: () => context.pushNamed(AppRoutes.personalData),
+        ),
+        ProfileListItem(
+          icon: LucideIcons.building2,
+          title: AppString.employmentData,
+          description: AppString.employmentDataDesc,
+          onTap: () => context.pushNamed(AppRoutes.employmentData),
+        ),
+      ],
     );
   }
 
-  Widget _profileDefaultItems() {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        return Column(
-          children: [
-            ProfileListItem(
-              icon: LucideIcons.settings,
-              title: AppString.setting,
-              onTap: () => {context.pushNamed(AppRoutes.settings)},
-            ),
-            ProfileListItem(
-              icon: LucideIcons.library,
-              title: AppString.legals,
-              onTap: () => context.pushNamed(AppRoutes.legal),
-            ),
-            ProfileListItem(
-              icon: LucideIcons.messageCircle,
-              title: AppString.help,
-              onTap: () => context.pushNamed(AppRoutes.help),
-            ),
-          ],
-        );
-      },
+  Widget _profileDefaultItems(BuildContext context) {
+    return Column(
+      children: [
+        ProfileListItem(
+          icon: LucideIcons.settings,
+          title: AppString.setting,
+          onTap: () => {context.pushNamed(AppRoutes.settings)},
+        ),
+        ProfileListItem(
+          icon: LucideIcons.library,
+          title: AppString.legals,
+          onTap: () => context.pushNamed(AppRoutes.legal),
+        ),
+        ProfileListItem(
+          icon: LucideIcons.messageCircle,
+          title: AppString.help,
+          onTap: () => context.pushNamed(AppRoutes.help),
+        ),
+      ],
     );
   }
 
   Widget _logoutButton() {
     return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+      builder: (context, ref, _) {
         return Padding(
           padding: EdgeInsets.only(
             top: context.height * 0.025,
