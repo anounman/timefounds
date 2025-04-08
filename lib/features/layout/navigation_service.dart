@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import '../core/config/app_string.dart';
-import 'app_routes.dart';
+import '../../app/core/config/app_string.dart';
+import '../../app/routes/app_routes.dart';
 import 'navigation_provider.dart';
 
+/// to create bottom navigation item items
 class NavItem {
   const NavItem({required this.label, required this.icon, required this.route});
   final String label;
