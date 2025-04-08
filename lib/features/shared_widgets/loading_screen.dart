@@ -19,7 +19,7 @@ class LoadingScreen extends HookWidget {
         }
       });
       return null;
-    }, const []);
+    }, const [],);
     return isLoading.value
         ? Scaffold(
           body: Scaffold(
