@@ -5,5 +5,3 @@ extension ContextExtension on BuildContext {
   double get height => mediaQuerySize.height;
   double get width => mediaQuerySize.width;
 }
-
-

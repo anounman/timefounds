@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../../app/core/config/app_color.dart';
 import '../../../../app/core/config/app_string.dart';
 import '../../../../app/core/config/assets.dart';
@@ -49,54 +47,47 @@ class ProfileCard extends StatelessWidget {
 
   /// hallo part
   Widget _profileCardHeader(Size deviceSize) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        return Container(
-          width: context.width,
-          decoration: BoxDecoration(
-            color: AppColor.profileCardBg,
-            borderRadius: BorderRadius.circular(18),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.1),
-                blurRadius: 6,
-                offset: Offset(0, 4),
-              ),
-            ],
+    return Container(
+      width: deviceSize.width,
+      decoration: BoxDecoration(
+        color: AppColor.profileCardBg,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.1),
+            blurRadius: 6,
+            offset: Offset(0, 4),
           ),
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: deviceSize.height * 0.02,
-              right: deviceSize.height * 0.02,
-              top: deviceSize.height * 0.025,
-              bottom: deviceSize.height * 0.025,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ],
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: deviceSize.height * 0.02,
+          right: deviceSize.height * 0.02,
+          top: deviceSize.height * 0.025,
+          bottom: deviceSize.height * 0.025,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              spacing: deviceSize.width * 0.01,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  spacing: deviceSize.width * 0.01,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Transform.scale(
-                      scaleX: -1, // Flip horizontally
-                      child: Icon(Icons.waving_hand_outlined, size: 25),
-                    ),
-                    Text(
-                      AppString.hello,
-                      style: CustomTextStyle.profileCardHello,
-                    ),
-                  ],
+                Transform.scale(
+                  scaleX: -1, // Flip horizontally
+                  child: Icon(Icons.waving_hand_outlined, size: 25),
                 ),
-
-                Text(email, style: CustomTextStyle.profileCardEmail),
+                Text(AppString.hello, style: CustomTextStyle.profileCardHello),
               ],
             ),
-          ),
-        );
-      },
+
+            Text(email, style: CustomTextStyle.profileCardEmail),
+          ],
+        ),
+      ),
     );
   }
 }

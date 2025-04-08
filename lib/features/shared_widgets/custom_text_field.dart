@@ -42,7 +42,7 @@ class CustomTextField {
           controller: controller,
           textAlign: TextAlign.left,
           validator: validator,
-
+          
           textAlignVertical: TextAlignVertical.center,
           onChanged: (value) {
             onChanged?.call(value);

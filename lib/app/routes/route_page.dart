@@ -36,7 +36,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       log('[route_log]isLoggedIn:$isLoggedIn');
       log('[route_log]isAtLogging:$isAtLogging');
       if (!isLoggedIn && !isAtLogging) return AppRoutes.login;
-      if (isLoggedIn && isAtLogging) return AppRoutes.home;
+      if (isLoggedIn && isAtLogging ) return AppRoutes.home;
       return null;
     },
     routes: [
