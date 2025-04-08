@@ -15,28 +15,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ProviderScope(
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+      ],
       child:
           isDebug
               ? DevicePreview(
                 builder: (context) {
-                  return ProviderScope(
-                    overrides: [
-                      sharedPreferencesProvider.overrideWithValue(
-                        sharedPreferences,
-                      ),
-                    ],
-                    child: MyApp(),
-                  );
+                  return MyApp();
                 },
               )
-              : ProviderScope(
-                overrides: [
-                  sharedPreferencesProvider.overrideWithValue(
-                    sharedPreferences,
-                  ),
-                ],
-                child: MyApp(),
-              ),
+              : MyApp(),
     ),
   );
 }
