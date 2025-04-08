@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app/core/config/app_color.dart';
 import '../../app/core/config/custom_text_style.dart';
-import '../../app/routes/navigation_provider.dart';
+import 'provider/navigation_provider.dart';
 
 class BottomNavBar extends ConsumerWidget {
   const BottomNavBar({super.key, required this.child});
